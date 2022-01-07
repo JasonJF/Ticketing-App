@@ -1,0 +1,33 @@
+{
+  "name": "ticketing-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "app": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonJF/Ticketing-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JasonJF/Ticketing-App/issues"
+  },
+  "homepage": "https://github.com/JasonJF/Ticketing-App#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.5",
+    "validation": "^0.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "dotenv": "^10.0.0"
+  }
+}
