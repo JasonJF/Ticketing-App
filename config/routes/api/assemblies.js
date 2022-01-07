@@ -15,30 +15,50 @@ router.get('/test', (req, res) => res.send('assembly route testing!'));
 // @description Get all books
 // @access Public
 router.get('/', (req, res) => {
-  Assembly.find()
-    .then(assemblies => res.json(assemblies))
-    .catch(err => res.status(404).json({ noassembliesfound: 'No Assemblies found' }));
+    Assembly.find()
+        .then(assemblies => res.json(assemblies))
+        .catch(err => res.status(404).json({
+            noassembliesfound: 'No Assemblies found'
+        }));
 });
 
 // @route GET api/assemblies/:id
 // @description Get single assembly by id
 // @access Public
 router.get('/:id', (req, res) => {
-  Assembly.findById(req.params.id)
-    .then(assembly => res.json(assembly))
-    .catch(err => res.status(404).json({ noassemblyfound: 'No Assembly found' }));
+    Assembly.findById(req.params.id)
+        .then(assembly => res.json(assembly))
+        .catch(err => res.status(404).json({
+            noassemblyfound: 'No Assembly found'
+        }));
 });
 
 // @route GET api/books
 // @description add/save book
 // @access Public
 router.post('/', (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     //save data from body
     // res.send("Successfull.");
-    Assembly.create(req.body)
-        .then(assembly => res.json({ msg: 'Assembly added successfully' }))
-        .catch(err => res.status(400).json({ error: 'Unable to add this assembly' }));
+
+    //Check if assembly exists
+    Assembly.find({
+        partNumber: req.body.partNumber,
+        serialNumber: req.body.serialNumber
+    }, (err, foundAssy) => {
+        if (foundAssy.length) {
+            res.send("Assembly already exists: " + foundAssy);
+        } else {
+            Assembly.create(req.body)
+                .then(assembly => res.json({
+                    msg: 'Assembly added successfully'
+                }))
+                .catch(err => res.status(400).json({
+                    error: 'Unable to add this assembly'
+                }));
+        }
+    });
+
 });
 
 // @route GET api/books/:id
