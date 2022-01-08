@@ -33,8 +33,8 @@ router.get('/:id', (req, res) => {
         }));
 });
 
-// @route GET api/books
-// @description add/save book
+// @route POST api/assemblies
+// @description add/save assembly
 // @access Public
 router.post('/', (req, res) => {
     // console.log(req.body);
